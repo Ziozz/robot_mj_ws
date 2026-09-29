@@ -1,0 +1,75 @@
+name = "unitree_g1_29dof_three_finger"
+model = "assets/robots/unitree_g1/g1_mocap_29dof_with_hands.xml"
+home_keyframe = "stand"
+floating_base_joint = "root"
+
+[groups.right_arm]
+joints = [
+  "right_shoulder_pitch_joint",
+  "right_shoulder_roll_joint",
+  "right_shoulder_yaw_joint",
+  "right_elbow_joint",
+  "right_wrist_roll_joint",
+  "right_wrist_pitch_joint",
+  "right_wrist_yaw_joint",
+]
+
+[groups.left_arm]
+joints = [
+  "left_shoulder_pitch_joint",
+  "left_shoulder_roll_joint",
+  "left_shoulder_yaw_joint",
+  "left_elbow_joint",
+  "left_wrist_roll_joint",
+  "left_wrist_pitch_joint",
+  "left_wrist_yaw_joint",
+]
+
+[groups.right_hand]
+joints = [
+  "right_hand_thumb_0_joint",
+  "right_hand_thumb_1_joint",
+  "right_hand_thumb_2_joint",
+  "right_hand_index_0_joint",
+  "right_hand_index_1_joint",
+  "right_hand_middle_0_joint",
+  "right_hand_middle_1_joint",
+]
+
+[groups.left_hand]
+joints = [
+  "left_hand_thumb_0_joint",
+  "left_hand_thumb_1_joint",
+  "left_hand_thumb_2_joint",
+  "left_hand_index_0_joint",
+  "left_hand_index_1_joint",
+  "left_hand_middle_0_joint",
+  "left_hand_middle_1_joint",
+]
+
+[end_effectors.right_hand]
+parent_body = "right_wrist_yaw_link"
+position = [0.140, -0.003, 0.0]
+quaternion = [1.0, 0.0, 0.0, 0.0]
+touch_bodies = [
+  "right_hand_thumb_2_link",
+  "right_hand_index_1_link",
+  "right_hand_middle_1_link",
+]
+
+[end_effectors.left_hand]
+parent_body = "left_wrist_yaw_link"
+position = [0.140, 0.003, 0.0]
+quaternion = [1.0, 0.0, 0.0, 0.0]
+touch_bodies = [
+  "left_hand_thumb_2_link",
+  "left_hand_index_1_link",
+  "left_hand_middle_1_link",
+]
+
+[control.right_arm]
+kp = [120.0, 120.0, 90.0, 90.0, 35.0, 35.0, 25.0]
+kd = [12.0, 12.0, 9.0, 9.0, 4.0, 4.0, 3.0]
+velocity_gain = [14.0, 14.0, 11.0, 11.0, 5.0, 5.0, 4.0]
+effort_limit = [25.0, 25.0, 25.0, 25.0, 5.0, 5.0, 5.0]
+

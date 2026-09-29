@@ -1,0 +1,55 @@
+# Robot-specific grasp geometry and compliant hand settings.  The planner and
+# executor consume this file through generic joint/body names.
+target_body = "pick_cylinder"
+target_joint = "pick_cylinder_joint"
+arm_group = "right_arm"
+hand_group = "right_hand"
+end_effector = "right_hand"
+
+# T_object_grasp. This side-pinch candidate was calibrated against the actual
+# G1 three-finger meshes.  Runtime object truth supplies T_world_object.
+object_to_grasp_rotation = [
+  [ 0.218106150,  0.334620290,  0.916765490],
+  [-0.523299990,  0.833016970, -0.179554570],
+  [-0.823763820, -0.440581420,  0.356792920],
+]
+# Mesh-calibrated side grasp.  The configured pose starts 30 mm from contact
+# along a reachable horizontal direction; guarded closure moves sideways while
+# monitoring all three distal links.  A radial retreat was outside this arm's
+# full-pose IK workspace even though the contact pose itself was reachable.
+object_to_grasp_translation = [0.021045240, -0.062905340, 0.058807450]
+closure_translation = [-0.029544230, -0.005209450, 0.0]
+retreat_distance = 0.0
+pregrasp_direction_object = [0.0, -1.0, 0.0]
+cartesian_steps = 12
+
+# Natural redundant branch; shoulder yaw and wrist limits are penalized by
+# multi-start IK instead of accepting whichever branch one seed finds first.
+natural_posture = [-0.5694, -0.3117, -0.3104, 1.0462, 0.9488, 0.3249, -1.3891]
+seed_std = [0.35, 0.30, 0.55, 0.25, 0.45, 0.35, 0.35]
+random_seed = 29
+seed_count = 14
+staging_posture = [0.0, -0.5, 0.0, 0.8, 0.5, 0.5, -0.5]
+
+[hand]
+# Index is farther from the opposed thumb than the middle finger in this hand,
+# so it receives more travel; both remain inside their URDF joint limits.
+closed = [-0.35, 0.45, -1.15, 1.50, 1.70, 1.15, 1.35]
+# Fractions are independent because the G1 thumb, index, and middle finger
+# meshes reach a 50 mm cylinder at different joint travel.
+contact_fraction = [0.81095350, 0.70118427, 0.46922325]
+thumb_preshape = 0.0
+close_rate = 0.45
+max_close_fraction = 0.98
+squeeze_fraction = 0.10
+kp = 18.0
+torque_limit = 0.30
+contact_force = 0.01
+hold_force = 0.01
+hold_time = 0.70
+minimum_hold_fraction = 0.65
+maximum_center_error = 0.008
+maximum_opposition_cosine = -0.60
+maximum_penetration = 0.0015
+pregrasp_pause = 0.80
+trial_lift_distance = 0.030

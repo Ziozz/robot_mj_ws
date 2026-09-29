@@ -1,0 +1,34 @@
+[right_arm]
+# Conservative task limits for the current simulation. They are intentionally
+# independent from upperbody-bridge because that project controls another robot.
+velocity = [0.80, 0.80, 0.90, 0.90, 1.10, 1.10, 1.10]
+acceleration = [1.50, 1.50, 1.70, 1.70, 2.00, 2.00, 2.00]
+safety = 0.85
+
+# upperbody-bridge publishes at 2 ms and drives all joints from one normalized
+# motion progress. We retain that timing/interface idea; TOPP-RA supplies the
+# shared progress while respecting the per-joint limits above.
+control_period = 0.002
+
+[right_arm.ompl]
+planner = "RRTConnect"
+timeout = 4.0
+range = 0.22
+edge_joint_step = 0.04
+simplify = true
+
+# Final Cartesian approach and trial lift deliberately use lower task-space
+# speed.  They still share one TOPP-RA clock, so all seven joints start and
+# stop together at phase boundaries.
+[right_arm_approach]
+velocity = [0.32, 0.32, 0.36, 0.36, 0.42, 0.42, 0.42]
+acceleration = [0.55, 0.55, 0.65, 0.65, 0.75, 0.75, 0.75]
+safety = 0.80
+control_period = 0.002
+
+[right_arm_approach.ompl]
+planner = "RRTConnect"
+timeout = 4.0
+range = 0.16
+edge_joint_step = 0.025
+simplify = true

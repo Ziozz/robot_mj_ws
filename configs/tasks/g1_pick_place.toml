@@ -1,0 +1,53 @@
+# Task geometry is deliberately separate from the G1 robot description. A new
+# robot can reuse these semantic objects after changing only reachable poses.
+
+[table]
+position = [0.50, 0.0, 0.68]
+half_size = [0.30, 0.45, 0.04]
+rgba = [0.45, 0.32, 0.20, 1.0]
+
+[[obstacles]]
+name = "barrier"
+shape = "box"
+position = [0.28, -0.08, 0.79]
+size = [0.025, 0.045, 0.07]
+rgba = [0.90, 0.20, 0.15, 1.0]
+
+# Box distractor. The main target below is an upright cylinder.
+[[objects]]
+name = "pick_box"
+shape = "box"
+position = [0.46, 0.08, 0.762]
+size = [0.015, 0.015, 0.015]
+mass = 0.10
+rgba = [0.95, 0.70, 0.12, 1.0]
+friction = [1.2, 0.01, 0.001]
+grasp_target = false
+
+# Main target: diameter 50 mm, height 160 mm, standing directly on the table.
+# Thumb contacts one side; index and middle fingers contact the opposite side.
+[[objects]]
+name = "pick_cylinder"
+shape = "cylinder"
+position = [0.34, -0.24, 0.802]
+size = [0.025, 0.080]
+mass = 0.12
+rgba = [0.20, 0.55, 0.95, 1.0]
+friction = [1.5, 0.01, 0.001]
+grasp_target = true
+
+# Distractor/candidate 2: diameter 76 mm sphere.
+[[objects]]
+name = "pick_sphere"
+shape = "sphere"
+position = [0.38, 0.34, 0.760]
+size = [0.038]
+mass = 0.08
+rgba = [0.65, 0.30, 0.90, 1.0]
+friction = [1.2, 0.01, 0.001]
+grasp_target = false
+
+[place_goal]
+position = [0.30, 0.14, 0.722]
+radius = 0.10
+rgba = [0.15, 0.80, 0.25, 0.45]

@@ -1,0 +1,21 @@
+# Adjacent kinematic links and geometries on the same link are filtered
+# automatically. This file contains only model-specific designed overlaps.
+
+[margins]
+# Positive planning-only inflation absorbs mesh/backend tolerances and dynamic
+# tracking error. MuJoCo still executes the unmodified physical geometry.
+environment = 0.003
+# The task also performs an independent exact MuJoCo-mesh check.  Five
+# millimetres covers controller/backend disagreement without making the narrow
+# three-finger pregrasp geometrically impossible.
+target_before_grasp = 0.005
+
+[[allowed_pairs]]
+first = "right_wrist_yaw_link"
+second = "right_hand_thumb_1_link"
+reason = "Designed overlap in the supplied three-finger hand mesh"
+
+[[allowed_pairs]]
+first = "left_wrist_yaw_link"
+second = "left_hand_thumb_1_link"
+reason = "Designed overlap in the supplied three-finger hand mesh"
